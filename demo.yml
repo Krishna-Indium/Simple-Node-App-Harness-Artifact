@@ -1,0 +1,36 @@
+pipeline:
+  name: demo-artifact
+  identifier: demoartifact
+  projectIdentifier: artifact
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: artifactgit
+        repoName: Simple-Node-App-Harness-Artifact
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: ArtifactoryUpload
+                  name: ArtifactoryUpload_1
+                  identifier: ArtifactoryUpload_1
+                  spec:
+                    connectorRef: jfrogartifact
+                    target: docker/
+                    sourcePath: pack.json
