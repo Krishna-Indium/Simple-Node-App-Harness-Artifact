@@ -21,6 +21,17 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: vm_docker
+                    image: docskrishna/nvm-npm-jdk
+                    shell: Sh
+                    command: |-
+                      npm install
+                      npm run build --if-present
+              - step:
                   type: ArtifactoryUpload
                   name: ArtifactoryUpload_1
                   identifier: ArtifactoryUpload_1
