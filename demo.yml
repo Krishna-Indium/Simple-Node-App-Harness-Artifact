@@ -18,12 +18,6 @@ pipeline:
         type: CI
         spec:
           cloneCodebase: true
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Docker
-            spec: {}
           execution:
             steps:
               - step:
@@ -34,3 +28,11 @@ pipeline:
                     connectorRef: jfrogartifact
                     target: docker/
                     sourcePath: pack.json
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: k8sartifact
+              namespace: kube-system
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
