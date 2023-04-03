@@ -1,0 +1,54 @@
+pipeline:
+  name: artifact
+  identifier: artifact
+  projectIdentifier: harnessdemo
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: artifactgit
+        repoName: Simple-Node-App-Harness-Artifact
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: |-
+                      npm install
+                      npm run build --if-present
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: jfrogregdocker
+                    repo: artifactory/docker/
+                    tags:
+                      - harnessteam.jfrog.io/docker
+              - step:
+                  type: ArtifactoryUpload
+                  name: ArtifactoryUpload_1
+                  identifier: ArtifactoryUpload_1
+                  spec:
+                    connectorRef: jfrogartifact
+                    target: docker/
+                    sourcePath: package.json
