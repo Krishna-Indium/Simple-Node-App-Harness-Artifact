@@ -42,7 +42,7 @@ pipeline:
                       identifier: BuildAndPushDockerRegistry_1
                       spec:
                         connectorRef: jfrogregdocker
-                        repo: artifactory/docker/
+                        repo: harnessteam.jfrog.io/hello
                         tags:
                           - latest
                   - step:
