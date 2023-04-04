@@ -28,19 +28,19 @@ pipeline:
                     connectorRef: vm_docker
                     image: docskrishna/nvm-npm-jdk
                     shell: Sh
-                    command: |-
+                    command: |+
                       npm install
                       npm run build --if-present
-                      docker login -ukrishnamur3@gmail.com harnessteam.jfrog.io
-                      cmVmdGtuOjAxOjE3MTE5OTYyODA6QUVqaVZ4NDNCRUtYclNCTDhpaklDejQwS0ww
+
               - step:
-                  type: ArtifactoryUpload
-                  name: ArtifactoryUpload_1
-                  identifier: ArtifactoryUpload_1
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
                   spec:
-                    connectorRef: jfrogartifact
-                    target: docker/
-                    sourcePath: pack.json
+                    connectorRef: vm_docker
+                    repo: nvm-npm-jdk
+                    tags:
+                      - latest
           infrastructure:
             type: KubernetesDirect
             spec:
