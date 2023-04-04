@@ -47,8 +47,8 @@ pipeline:
                   identifier: ArtifactoryUpload_1
                   spec:
                     connectorRef: jfrogartifact
-                    target: harnessteam.jfrog.io/artifactory/docker
-                    sourcePath: docskrishna/nvm-npm-jdk:latest
+                    target: docskrishna/nvm-npm-jdk:latest
+                    sourcePath: harnessteam.jfrog.io/artifactory/docker/hello
           infrastructure:
             type: KubernetesDirect
             spec:
