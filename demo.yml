@@ -38,7 +38,7 @@ pipeline:
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: vm_docker
-                    repo: nvm-npm-jdk
+                    repo: docskrishna/nvm-npm-jdk
                     tags:
                       - latest
           infrastructure:
