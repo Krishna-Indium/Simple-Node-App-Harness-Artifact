@@ -50,5 +50,5 @@ pipeline:
                   identifier: ArtifactoryUpload_1
                   spec:
                     connectorRef: jfrogartifact
-                    target: docker/hello/
+                    target: docker/hello world/
                     sourcePath: package.json
