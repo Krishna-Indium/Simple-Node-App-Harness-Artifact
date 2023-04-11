@@ -51,4 +51,4 @@ pipeline:
                   spec:
                     connectorRef: jfrogartifact
                     target: docker/hello world/
-                    sourcePath: package.json
+                    sourcePath: Simple-Node-App-Harness-Artifact/package.json
