@@ -50,5 +50,5 @@ pipeline:
                   identifier: ArtifactoryUpload_1
                   spec:
                     connectorRef: jfrogartifact
-                    target: docker/hello world/
+                    target: npm/hello world/
                     sourcePath: Simple-Node-App-Harness-Artifact/package.json
