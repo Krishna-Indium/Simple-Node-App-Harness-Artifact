@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Krishna_Indium_Simple_Node_App_Harness_Artifact_1705484011152-pr-trigger-input-set
+  identifier: Build_Krishna_Indium_Simple_Node_App_Harness_Artifact_1705484011152prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: poc
+  pipeline:
+    identifier: Build_Krishna_Indium_Simple_Node_App_Harness_Artifact_1705484011152
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
