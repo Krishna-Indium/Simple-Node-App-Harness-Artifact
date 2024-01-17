@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_Krishna_Indium_Simple_Node_App_Harness_Artifact_1705484011152-push-trigger-input-set
+  identifier: Build_Krishna_Indium_Simple_Node_App_Harness_Artifact_1705484011152pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: poc
+  pipeline:
+    identifier: Build_Krishna_Indium_Simple_Node_App_Harness_Artifact_1705484011152
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
