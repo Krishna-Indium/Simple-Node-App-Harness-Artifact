@@ -36,7 +36,7 @@ pipeline:
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
                   spec:
-                    connectorRef: doc
+                    connectorRef: docker
                     repo: docskrishna/harness_repo
                     tags:
                       - latest
