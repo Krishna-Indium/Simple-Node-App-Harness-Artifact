@@ -1,0 +1,51 @@
+pipeline:
+  identifier: Build_Krishna_Indium_Simple_Node_App_Harness_Artifact_1705640545252
+  name: Build Simple-Node-App-Harness-Artifact
+  orgIdentifier: default
+  projectIdentifier: hello_world
+  properties:
+    ci:
+      codebase:
+        build: <+input>
+        connectorRef: account.Github
+        repoName: Krishna-Indium/Simple-Node-App-Harness-Artifact
+  stages:
+    - stage:
+        identifier: build
+        name: build
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  identifier: npminstall
+                  name: npm_install
+                  spec:
+                    command: npm install
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: npmtest
+                  name: npm_test
+                  spec:
+                    command: npm run test
+                  timeout: ""
+                  type: Run
+              - step:
+                  identifier: dockerbuild
+                  name: docker_build
+                  spec:
+                    image: plugins/docker
+                    settings:
+                      dry_run: "true"
+                      repo: hello/world
+                      tags: latest
+                  timeout: ""
+                  type: Plugin
+          platform:
+            arch: Amd64
+            os: Linux
+          runtime:
+            spec: {}
+            type: Cloud
+        type: CI
