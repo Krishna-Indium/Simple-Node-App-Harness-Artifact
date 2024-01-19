@@ -18,24 +18,11 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: npminstall
-                  name: npm_install
-                  spec:
-                    command: npm install
-                  timeout: ""
-                  type: Run
-              - step:
-                  identifier: npmtest
-                  name: npm_test
-                  spec:
-                    command: npm run test
-                  timeout: ""
-                  type: Run
-              - step:
                   identifier: dockerbuild
                   name: docker_build
                   spec:
-                    image: plugins/docker
+                    connectorRef: docker
+                    image: docskrishna/harness_repo
                     settings:
                       dry_run: "true"
                       repo: hello/world
@@ -43,9 +30,48 @@ pipeline:
                   timeout: ""
                   type: Plugin
           platform:
-            arch: Amd64
             os: Linux
+            arch: Amd64
           runtime:
-            spec: {}
             type: Cloud
+            spec: {}
         type: CI
+    - stage:
+        name: deploy
+        identifier: deploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: svc
+          environment:
+            environmentRef: env
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: infra
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
