@@ -18,17 +18,14 @@ pipeline:
           execution:
             steps:
               - step:
-                  identifier: dockerbuild
-                  name: docker_build
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
                   spec:
                     connectorRef: docker
-                    image: docskrishna/harness_repo
-                    settings:
-                      dry_run: "true"
-                      repo: hello/world
-                      tags: latest
-                  timeout: ""
-                  type: Plugin
+                    repo: docskrishna/harness_repo
+                    tags:
+                      - latest
           platform:
             os: Linux
             arch: Amd64
