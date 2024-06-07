@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: app-deployment
-        image: docskrishna/harness_repo:latest
+        image: docskrishna/gen_ai:latest
         resources:
           requests:
             cpu: "100m"
